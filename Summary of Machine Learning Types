@@ -1,0 +1,14 @@
+"Summary
+· There are several types of machine learning, including supervised learning and unsupervised learning.
+· Supervised learning is used on labelled data, and it is good for making predictions.
+· Unsupervised learning is used on unlabelled data, and it is normally used as a preprocessing step.
+· Two very common types of supervised learning algorithms are called regression and classification.
+o Regression models are those in which the answer is any number.
+o Classification models are those in which the answer is of a type yes/no. The answer is normally given as a number between 0 and 1, denoting a probability.
+· Two very common types of unsupervised learning algorithms are clustering and dimensionality reduction.
+o Clustering is used to group our data into similar clusters, in order to extract information, or make it easier to handle.
+o Dimensionality reduction is a way to simplify our data, by joining certain similar features and losing as little information as possible.
+· Reinforcement learning is a type of machine learning used where an agent has to navigate an environment and reach a goal. It is extensively used in many cutting edge applications."
+
+Reference:
+grokking Machine Learning book by Luis G. Serrano. 
