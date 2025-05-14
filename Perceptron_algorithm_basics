@@ -1,0 +1,56 @@
+##Perceptron Algorithm
+##This code will classify a few 2D points into one of two categories:
+##Class 1: Above the line x + y = 1.5
+##Class 0: Below the line
+
+import pandas as pd
+import random
+
+# Sample dataset (4 points in 2D)
+data = {
+    'x1': [0.5, 1.0, 1.5, 2.0],
+    'x2': [1.0, 0.5, 1.5, 1.0],
+    'label': [0, 0, 1, 1]
+}
+
+df = pd.DataFrame(data)
+X = df[['x1', 'x2']]
+y = df['label']
+
+# Perceptron trick: update weights if prediction is wrong
+def perceptron_trick(weights, bias, x, y_true, learning_rate=0.1):
+    prediction = 1 if sum(w * xi for w, xi in zip(weights, x)) + bias > 0 else 0
+    error = y_true - prediction
+    if error != 0:
+        weights = [w + learning_rate * error * xi for w, xi in zip(weights, x)]
+        bias += learning_rate * error
+    return weights, bias
+
+# Total error function
+def total_error(weights, bias, X, y):
+    error = 0
+    for i in range(len(X)):
+        x = X.loc[i]
+        y_true = y[i]
+        prediction = 1 if sum(w * xi for w, xi in zip(weights, x)) + bias > 0 else 0
+        error += abs(y_true - prediction)
+    return error
+
+# Perceptron algorithm
+def perceptron_algorithm(X, y, learning_rate=0.1, epochs=10):
+    weights = [1.0 for _ in range(len(X.loc[0]))]
+    bias = 0.0
+    errors = []
+    for epoch in range(epochs):
+        errors.append(total_error(weights, bias, X, y))
+        j = random.randint(0, len(X) - 1)
+        weights, bias = perceptron_trick(weights, bias, X.loc[j], y[j], learning_rate)
+    return weights, bias, errors
+
+# Run it
+final_weights, final_bias, training_errors = perceptron_algorithm(X, y)
+
+# Output results
+print("Final weights:", final_weights)
+print("Final bias:", final_bias)
+print("Training error by epoch:", training_errors)
